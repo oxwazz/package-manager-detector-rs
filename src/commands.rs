@@ -6,10 +6,27 @@ pub fn npm_run<'a>(agent: &'a str) -> impl Fn(Vec<&'a str>) -> Vec<&'a str> {
                 result.extend(&args[1..]);
                 result
             },
-            len if len == 1 => vec![agent, "run", args[0]],
+            1 => vec![agent, "run", args[0]],
             _ => vec![]
         }
     }
+}
+
+#[derive(Debug)]
+pub enum VectorPart_ {
+    String(String),
+    Number(u16)
+}
+
+#[derive(Debug)]
+pub enum AgentCommandValue<T> {
+    Vector(Vec<T>),
+    // Function(Box<dyn Fn(Vec<String>) -> Vec<String>>),
+    None,
+}
+
+pub fn construct_command<T: std::fmt::Debug>(value: AgentCommandValue<T>) {
+    dbg!(value);
 }
 
 #[cfg(test)]
@@ -48,7 +65,7 @@ mod tests {
     fn test_empty_args() {
         let npm = npm_run("npm");
         let result = npm(vec![]);
-        assert!(result.is_empty());  // Or handle however you want empty input
+        assert!(result.is_empty());
     }
 }
 
