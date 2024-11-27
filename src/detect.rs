@@ -1,7 +1,7 @@
 use regex::Regex;
 use serde::Deserialize;
 use std::fs;
-use std::path::Path;
+use std::path::{Path, PathBuf};
 
 pub const AGENTS: [&str; 7] = ["npm", "yarn", "yarn@berry", "pnpm", "pnpm@6", "bun", "deno"];
 
@@ -67,4 +67,28 @@ pub fn parse_package_json<'a>(
             }
         }
     }
+}
+
+pub fn lookup(cwd: Option<PathBuf>) -> impl Iterator<Item = PathBuf> {
+    // Default to current working directory if not provided
+    let directory = cwd.unwrap_or_else(|| std::env::current_dir().unwrap_or(PathBuf::from(".")));
+
+    // Canonicalize the path to resolve any symlinks or relative paths
+    let mut directory = dunce::canonicalize(directory).unwrap();
+    let root = directory.ancestors().last().unwrap().to_path_buf();
+
+    std::iter::from_fn(move || {
+        // If we have reached the root, stop iteration
+        if directory == root {
+            return None;
+        }
+
+        // Store the current directory to return
+        let current = directory.clone();
+
+        // Move up to the parent directory, or stop at the root
+        directory = directory.parent().unwrap_or(&root).to_path_buf();
+
+        Some(current)
+    })
 }

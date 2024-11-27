@@ -1,0 +1,11 @@
+---
+source: tests/detect/lookup.rs
+expression: "result.collect::<Vec<_>>()"
+snapshot_kind: text
+---
+[
+    "/tmp/a/b/c",
+    "/tmp/a/b",
+    "/tmp/a",
+    "/tmp",
+]

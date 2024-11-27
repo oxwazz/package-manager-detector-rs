@@ -1,10 +1,10 @@
+use dotenv::dotenv;
 use package_manager_detector_rs::commands::{
     construct_command, npm_run, AgentCommandValue, VectorPart_,
 };
-use package_manager_detector_rs::detect::parse_package_json;
+use package_manager_detector_rs::detect::{lookup, parse_package_json};
 use std::env;
-use std::path::Path;
-use dotenv::dotenv;
+use std::path::{Path, PathBuf};
 
 struct ReturnResolveCommand {
     command: String,
@@ -37,6 +37,10 @@ fn main() {
     // test
     let tes = parse_package_json(Path::new("package.json"), None).unwrap();
     dbg!(tes);
+
+    let root = PathBuf::from("src");
+
+    lookup(Some(root.clone()));
     // test
 
     // let tes = vec!["1213", 0];

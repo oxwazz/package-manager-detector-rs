@@ -3,5 +3,6 @@ mod commands {
 }
 
 mod detect {
+    mod lookup;
     mod parse_package_json;
 }
