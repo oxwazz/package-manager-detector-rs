@@ -1,8 +1,10 @@
 use package_manager_detector_rs::commands::{
     construct_command, npm_run, AgentCommandValue, VectorPart_,
 };
-use package_manager_detector_rs::detect::handle_package_manager;
+use package_manager_detector_rs::detect::parse_package_json;
+use std::env;
 use std::path::Path;
+use dotenv::dotenv;
 
 struct ReturnResolveCommand {
     command: String,
@@ -14,6 +16,13 @@ fn resolve_command(agent: &str, command: &str, args: Vec<&str>) -> ReturnResolve
 }
 
 fn main() {
+    dotenv().ok(); // Reads the .env file
+
+    let api_key = env::var("API_KEY");
+    match api_key {
+        Ok(val) => println!("API_KEY: {:?}", val),
+        Err(e) => println!("Error API_KEY: {}", e),
+    }
     println!("Hello, world!");
     let npm = npm_run("npm");
     let args = vec!["test", "unit"];
@@ -26,7 +35,7 @@ fn main() {
     dbg!(result2);
 
     // test
-    let tes = handle_package_manager(Path::new("package.json"), None).unwrap();
+    let tes = parse_package_json(Path::new("package.json"), None).unwrap();
     dbg!(tes);
     // test
 

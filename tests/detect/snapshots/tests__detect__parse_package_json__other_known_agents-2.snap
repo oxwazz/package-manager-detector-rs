@@ -1,0 +1,6 @@
+---
+source: tests/detect/parse_package_json.rs
+expression: package_info
+snapshot_kind: text
+---
+HandlePackageManagerReturn { name: "bun", agent: "bun", version: "1.2.3" }

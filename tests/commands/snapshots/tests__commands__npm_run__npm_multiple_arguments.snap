@@ -1,0 +1,6 @@
+---
+source: tests/commands/npm_run.rs
+expression: output
+snapshot_kind: text
+---
+["npm", "run", "test", "--", "unit", "--watch"]

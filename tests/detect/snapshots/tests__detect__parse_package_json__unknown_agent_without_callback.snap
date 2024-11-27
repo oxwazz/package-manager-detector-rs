@@ -1,0 +1,6 @@
+---
+source: tests/detect/parse_package_json.rs
+expression: result
+snapshot_kind: text
+---
+None
