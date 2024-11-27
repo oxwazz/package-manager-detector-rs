@@ -7,8 +7,9 @@
     <cargoProject FILE="$PROJECT_DIR$/Cargo.toml" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ceba302-7a85-4e4a-b84d-43e89ecfc246" name="Changes" comment="feat: add test cases &amp; integrate dotenv">
+    <list default="true" id="9ceba302-7a85-4e4a-b84d-43e89ecfc246" name="Changes" comment="feat: add lookup fn &amp; test cases">
       <change afterPath="$PROJECT_DIR$/tests/detect/lookup.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/detect/snapshots/tests__detect__lookup__it_works.snap" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Cargo.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Cargo.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/Cargo.toml" afterDir="false" />
@@ -252,7 +253,7 @@
       <workItem from="1732380214840" duration="3337000" />
       <workItem from="1732609949865" duration="6178000" />
       <workItem from="1732636887231" duration="11388000" />
-      <workItem from="1732676919318" duration="9420000" />
+      <workItem from="1732676919318" duration="9758000" />
     </task>
     <task id="LOCAL-00001" summary="feat: add handle_package_manager">
       <option name="closed" value="true" />
@@ -279,6 +280,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="feat: add handle_package_manager" />
     <MESSAGE value="feat: add test cases &amp; integrate dotenv" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: add test cases &amp; integrate dotenv" />
+    <MESSAGE value="feat: add lookup fn &amp; test cases" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: add lookup fn &amp; test cases" />
   </component>
 </project>
