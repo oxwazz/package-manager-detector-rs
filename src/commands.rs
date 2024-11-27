@@ -25,5 +25,14 @@ pub enum AgentCommandValue<T> {
 
 pub fn construct_command<T: std::fmt::Debug>(value: AgentCommandValue<T>) {
     dbg!(value);
+    todo!()
 }
 
+pub struct ReturnResolveCommand {
+    pub command: String,
+    pub args: Vec<String>,
+}
+
+pub fn resolve_command(agent: &str, command: &str, args: Vec<&str>) -> ReturnResolveCommand {
+    todo!()
+}

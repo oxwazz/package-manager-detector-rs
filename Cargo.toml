@@ -10,6 +10,7 @@ regex = "1.11.1"
 dotenv = "0.15.0"
 tempfile = "3.14.0"
 dunce = "1.0.5"
+phf = { version = "0.11.2", features = ["macros"] }
 
 [dev-dependencies]
 insta = "1.41.1"

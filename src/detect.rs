@@ -1,9 +1,8 @@
+use crate::constants::AGENTS;
 use regex::Regex;
 use serde::Deserialize;
 use std::fs;
 use std::path::{Path, PathBuf};
-
-pub const AGENTS: [&str; 7] = ["npm", "yarn", "yarn@berry", "pnpm", "pnpm@6", "bun", "deno"];
 
 #[derive(Debug, Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -31,7 +30,7 @@ pub fn parse_package_json<'a>(
             let p = p.replace_all(pkg_.package_manager.as_str(), "");
             let p = p.split("@").collect::<Vec<&str>>();
             if p.len() < 2 {
-                return None; // Or handle the error as appropriate
+                return None;
             }
             let name = p[0];
             let version = p[1];
@@ -91,4 +90,15 @@ pub fn lookup(cwd: Option<PathBuf>) -> impl Iterator<Item = PathBuf> {
 
         Some(current)
     })
+}
+
+pub fn detect() {
+    todo!()
+}
+
+/// I don't know how to implement this on rust,
+/// because `process.env npm_config_user_agent`
+/// is node running process environment variable
+pub fn get_user_agent() {
+    todo!()
 }

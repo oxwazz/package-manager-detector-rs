@@ -8,21 +8,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9ceba302-7a85-4e4a-b84d-43e89ecfc246" name="Changes" comment="feat: add lookup fn &amp; test cases">
-      <change afterPath="$PROJECT_DIR$/tests/detect/lookup.rs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/detect/snapshots/tests__detect__lookup__it_works.snap" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/constants.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Cargo.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Cargo.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/Cargo.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/commands.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/detect.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/detect.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/tests.rs" beforeDir="false" afterPath="$PROJECT_DIR$/tests/tests.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/types.rs" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="RsBuildProfile:test" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="RsBuildProfile:dev" />
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -102,7 +104,7 @@
     <option name="runOnTheFly" value="true" />
     <option name="tool" value="Clippy" />
   </component>
-  <component name="RunManager" selected="Cargo.Test detect::lookup::it_works">
+  <component name="RunManager" selected="Cargo.Run package-manager-detector-rs">
     <configuration name="Run package-manager-detector-rs" type="CargoCommandRunConfiguration" factoryName="Cargo Command" temporary="true">
       <option name="buildProfileId" value="dev" />
       <option name="command" value="run --package package-manager-detector-rs --bin package-manager-detector-rs" />
@@ -229,9 +231,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Cargo.Run package-manager-detector-rs" />
         <item itemvalue="Cargo.Test detect::lookup::it_works" />
         <item itemvalue="Cargo.Test detect::tests" />
-        <item itemvalue="Cargo.Run package-manager-detector-rs" />
         <item itemvalue="Cargo.Test detect::npm_run::test_npm_single_argument" />
         <item itemvalue="Cargo.Test commands::tests (1)" />
       </list>
@@ -253,7 +255,7 @@
       <workItem from="1732380214840" duration="3337000" />
       <workItem from="1732609949865" duration="6178000" />
       <workItem from="1732636887231" duration="11388000" />
-      <workItem from="1732676919318" duration="9758000" />
+      <workItem from="1732676919318" duration="12319000" />
     </task>
     <task id="LOCAL-00001" summary="feat: add handle_package_manager">
       <option name="closed" value="true" />
@@ -271,7 +273,23 @@
       <option name="project" value="LOCAL" />
       <updated>1732679961352</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="feat: add lookup fn &amp; test cases">
+      <option name="closed" value="true" />
+      <created>1732708677478</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1732708677478</updated>
+    </task>
+    <task id="LOCAL-00004" summary="feat: add lookup fn &amp; test cases">
+      <option name="closed" value="true" />
+      <created>1732708708633</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1732708708633</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
