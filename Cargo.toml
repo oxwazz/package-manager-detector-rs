@@ -1,5 +1,5 @@
 [package]
-name = "package-manager-detector-rs"
+name = "package_manager_detector_rs"
 version = "0.1.0"
 edition = "2021"
 

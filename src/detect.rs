@@ -1,4 +1,4 @@
-use crate::constants::AGENTS;
+use crate::constants::{AGENTS, LOCKS};
 use regex::Regex;
 use serde::Deserialize;
 use std::fs;
@@ -21,7 +21,10 @@ pub fn parse_package_json<'a>(
     filepath: &Path,
     on_unknown: Option<Box<dyn FnMut() + 'a>>,
 ) -> Option<HandlePackageManagerReturn> {
-    let pkg = fs::File::open(filepath).expect("package.json failed to open");
+    let pkg = match fs::File::open(filepath) {
+        Ok(v) => v,
+        Err(_) => return None,
+    };
     let pkg: Option<PackageJson> = serde_json::from_reader(pkg).ok();
     match pkg {
         None => None,
@@ -92,12 +95,50 @@ pub fn lookup(cwd: Option<PathBuf>) -> impl Iterator<Item = PathBuf> {
     })
 }
 
-pub fn detect() {
-    todo!()
+pub fn detect() -> Option<HandlePackageManagerReturn> {
+    let directories = lookup(Some(PathBuf::from(".")));
+    for directory in directories {
+        // Look up for lock files
+
+        for (lock_filename, lock_name) in LOCKS.into_iter() {
+            let lockfile_path = directory.join(lock_filename);
+            if (lockfile_path.is_file()) {
+                let result = parse_package_json(lockfile_path.as_path(), None);
+                match result {
+                    None => {
+                        return Some(HandlePackageManagerReturn {
+                            name: lock_name.to_string(),
+                            agent: lock_name.to_string(),
+                            version: "".to_string(),
+                        })
+                    }
+                    Some(v) => return Some(v),
+                }
+            }
+        }
+        // for (const lock of Object.keys(LOCKS)) {
+        //     if (await fileExists(path.join(directory, lock))) {
+        //         const name = LOCKS[lock]
+        //         const result = await parsePackageJson(path.join(directory, 'package.json'), onUnknown)
+        //                                               if (result)
+        //                                               return result
+        //                                               else
+        //                                               return { name, agent: name }
+        //     }
+        // }
+
+        // Look up for package.json
+        let packager_path = directory.join("package.json");
+        if packager_path.is_file() {
+            return parse_package_json(packager_path.as_path(), None);
+        }
+    }
+
+    None
 }
 
 /// I don't know how to implement this on rust,
-/// because `process.env npm_config_user_agent`
+/// because `process.env.npm_config_user_agent`
 /// is node running process environment variable
 pub fn get_user_agent() {
     todo!()
