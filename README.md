@@ -1,4 +1,4 @@
-# package-manager-detector-rs
+# package_manager_detector_rs
 
 [//]: # ([![npm version][npm-version-src]][npm-version-href])
 
