@@ -77,7 +77,7 @@ This package includes package manager agents and their corresponding commands fo
 
 ### Using Agents and Commands
 
-A `resolveCommand` function is provided to resolve the command for a specific agent.
+A `resolve_command` function is provided to resolve the command for a specific agent.
 
 ```rust
 use package_manager_detector_rs::commands::{resolve_command};
@@ -88,6 +88,7 @@ fn main() {
     if pm.is_none() {
         println!("Could not detect package manager")
     }
+
     println!("{:?}", pm);
     // HandlePackageManagerReturn {
     //     name: "yarn", agent: "yarn@berry", version: "berry"
@@ -96,6 +97,7 @@ fn main() {
     let agent = pm.unwrap().agent;
     let get_command = resolve_command(&agent, "add", vec!["@antfu/ni"]);
     let get_command = get_command.unwrap();
+    
     println!("Detected the {} package manager. You can run a install with {} {}", &agent, get_command.command, get_command.args.join(" "))
     // Detected the yarn@berry package manager. You can run a install with yarn add @antfu/ni
 }
