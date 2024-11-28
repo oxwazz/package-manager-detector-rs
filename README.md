@@ -125,7 +125,7 @@ WIP
 
 ## Credit
 
-package-manager-detector-rs is currently being developed and maintained
+package_manager_detector_rs is currently being developed and maintained
 by [Muhammad Rahmahalim](https://github.com/oxwazz),<br>
 This project is
 like [package-manager-detector](https://github.com/antfu-collective/package-manager-detector) ([Anthony Fu](https://github.com/antfu))
