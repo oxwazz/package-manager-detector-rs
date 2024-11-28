@@ -52,9 +52,9 @@ fn main() {
     }
 
     println!("{:?}", pm);
-    /// HandlePackageManagerReturn { 
-    ///     name: "yarn", agent: "yarn@berry", version: "berry"
-    /// }
+    // HandlePackageManagerReturn { 
+    //     name: "yarn", agent: "yarn@berry", version: "berry"
+    // }
 }
 ```
 
