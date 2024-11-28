@@ -99,10 +99,9 @@ pub fn detect() -> Option<HandlePackageManagerReturn> {
     let directories = lookup(Some(PathBuf::from(".")));
     for directory in directories {
         // Look up for lock files
-
         for (lock_filename, lock_name) in LOCKS.into_iter() {
             let lockfile_path = directory.join(lock_filename);
-            if (lockfile_path.is_file()) {
+            if lockfile_path.is_file() {
                 let result = parse_package_json(lockfile_path.as_path(), None);
                 match result {
                     None => {
@@ -116,16 +115,6 @@ pub fn detect() -> Option<HandlePackageManagerReturn> {
                 }
             }
         }
-        // for (const lock of Object.keys(LOCKS)) {
-        //     if (await fileExists(path.join(directory, lock))) {
-        //         const name = LOCKS[lock]
-        //         const result = await parsePackageJson(path.join(directory, 'package.json'), onUnknown)
-        //                                               if (result)
-        //                                               return result
-        //                                               else
-        //                                               return { name, agent: name }
-        //     }
-        // }
 
         // Look up for package.json
         let packager_path = directory.join("package.json");

@@ -1,6 +1,7 @@
 use dotenv::dotenv;
 use package_manager_detector_rs::detect::detect;
 use std::env;
+use package_manager_detector_rs::commands::{CommandList, COMMANDS};
 
 fn main() {
     dotenv().ok(); // Reads the .env file
@@ -10,6 +11,20 @@ fn main() {
         Ok(val) => println!("API_KEY: {:?}", val),
         Err(e) => println!("Error API_KEY: {}", e),
     }
+
+    let tes = COMMANDS.get("deno").expect("ads1");
+    let tes2 = tes.get("run").expect("ads2");
+    match tes2 {
+        CommandList::Static(v) => {
+            dbg!(v.join(" "));
+        }
+        CommandList::Dynamic(v) => {
+            dbg!(v.run(vec!["dev", "tes"]).join(" "));
+        }
+        CommandList::Empty => {
+            todo!()
+        }
+    };
 
     // Try to get the value of the environment variable "npm_config_user_agent"
     // match env::var("npm_config_user_agent") {
