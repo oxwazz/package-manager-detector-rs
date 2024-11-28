@@ -51,8 +51,9 @@ fn main() {
         None => println!("Could not detect package manager"),
         Some(pm_) => {
             println!("{:?}", pm_)
-            /// Output:
-            /// HandlePackageManagerReturn { name: "yarn", agent: "yarn@berry", version: "berry" }
+            /// HandlePackageManagerReturn { 
+            ///     name: "yarn", agent: "yarn@berry", version: "berry"
+            /// }
         }
     }
 }
@@ -124,11 +125,11 @@ WIP
 
 ## Credit
 
-package-manager-detector-rs is currently being developed and maintained by _
-_[Muhammad Rahmahalim](https://github.com/oxwazz)__,<br>
-This project is like _
-_[package-manager-detector](https://github.com/antfu-collective/package-manager-detector) ([Anthony Fu](https://github.com/antfu))
-__ but in rust.
+package-manager-detector-rs is currently being developed and maintained
+by [Muhammad Rahmahalim](https://github.com/oxwazz),<br>
+This project is
+like [package-manager-detector](https://github.com/antfu-collective/package-manager-detector) ([Anthony Fu](https://github.com/antfu))
+but in rust.
 
 ## License
 
