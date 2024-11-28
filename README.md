@@ -60,67 +60,48 @@ fn main() {
 
 ## Agents and Commands
 
-WIP
+This package includes package manager agents and their corresponding commands for:
 
-[//]: # (This package includes package manager agents and their corresponding commands for:)
+- `'agent'` - run the package manager with no arguments
+- `'install'` - install dependencies
+- `'frozen'` - install dependencies using frozen lockfile
+- `'add'` - add dependencies
+- `'uninstall'` - remove dependencies
+- `'global'` - install global packages
+- `'global_uninstall'` - remove global packages
+- `'upgrade'` - upgrade dependencies
+- `'upgrade-interactive'` - upgrade dependencies interactively: not available for `npm` and `bun`
+- `'execute'` - download & execute binary scripts
+- `'execute-local'` - execute binary scripts (from package locally installed)
+- `'run'` - run `package.json` scripts
 
-[//]: # ()
+### Using Agents and Commands
 
-[//]: # (- `'agent'` - run the package manager with no arguments)
+A `resolveCommand` function is provided to resolve the command for a specific agent.
 
-[//]: # (- `'install'` - install dependencies)
+```rust
+use package_manager_detector_rs::commands::{resolve_command};
+use package_manager_detector_rs::detect::{detect};
 
-[//]: # (- `'frozen'` - install dependencies using frozen lockfile)
+fn main() {
+    let pm = detect();
+    if pm.is_none() {
+        println!("Could not detect package manager")
+    }
+    println!("{:?}", pm);
+    // HandlePackageManagerReturn {
+    //     name: "yarn", agent: "yarn@berry", version: "berry"
+    // }
 
-[//]: # (- `'add'` - add dependencies)
+    let agent = pm.unwrap().agent;
+    let get_command = resolve_command(&agent, "add", vec!["@antfu/ni"]);
+    let get_command = get_command.unwrap();
+    println!("Detected the {} package manager. You can run a install with {} {}", &agent, get_command.command, get_command.args.join(" "))
+    // Detected the yarn@berry package manager. You can run a install with yarn add @antfu/ni
+}
+```
 
-[//]: # (- `'uninstall'` - remove dependencies)
-
-[//]: # (- `'global'` - install global packages)
-
-[//]: # (- `'global_uninstall'` - remove global packages)
-
-[//]: # (- `'upgrade'` - upgrade dependencies)
-
-[//]: # (- `'upgrade-interactive'` - upgrade dependencies interactively: not available for `npm` and `bun`)
-
-[//]: # (- `'execute'` - download & execute binary scripts)
-
-[//]: # (- `'execute-local'` - execute binary scripts &#40;from package locally installed&#41;)
-
-[//]: # (- `'run'` - run `package.json` scripts)
-
-[//]: # ()
-
-[//]: # (### Using Agents and Commands)
-
-[//]: # ()
-
-[//]: # (A `resolve_command` function is provided to resolve the command for a specific agent.)
-
-[//]: # ()
-
-[//]: # (```ts)
-
-[//]: # (import { resolve_command } from 'package-manager-detector/commands')
-
-[//]: # (import { detect } from 'package-manager-detector/detect')
-
-[//]: # ()
-
-[//]: # (const pm = await detect&#40;&#41;)
-
-[//]: # (if &#40;!pm&#41;)
-
-[//]: # (  throw new Error&#40;'Could not detect package manager'&#41;)
-
-[//]: # ()
-
-[//]: # (const { command, args } = resolve_command&#40;pm.agent, 'add', ['@antfu/ni']&#41; // { command: 'pnpm', args: ['add', '@antfu/ni'] })
-
-[//]: # (console.log&#40;`Detected the ${pm.agent} package manager. You can run a install with ${command} ${args.join&#40;' '&#41;}`&#41;)
-
-[//]: # (```)
+You can check the source code for more information.
 
 ## Credit
 
