@@ -47,15 +47,12 @@ use package_manager_detector_rs::detect::{detect};
 
 fn main() {
     let pm = detect();
-    match pm {
-        None => println!("Could not detect package manager"),
-        Some(pm_) => {
-            println!("{:?}", pm_)
-            /// HandlePackageManagerReturn { 
-            ///     name: "yarn", agent: "yarn@berry", version: "berry"
-            /// }
-        }
+    if pm.is_none() {
+        println!("Could not detect package manager")
     }
+    println!("{:?}", pm);
+    /// Output:
+    /// HandlePackageManagerReturn { name: "yarn", agent: "yarn@berry", version: "berry" }
 }
 ```
 
