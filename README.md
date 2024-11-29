@@ -16,27 +16,17 @@ package manager and use the `packageManager` field in your `package.json` if pre
 
 ## Install
 
-WIP
+Run the following Cargo command in your project directory:
 
-[//]: # (```sh)
+```sh
+cargo add package_manager_detector_rs
+```
 
-[//]: # (# pnpm)
+Or add the following line to your Cargo.toml:
 
-[//]: # (pnpm add package-manager-detector)
-
-[//]: # ()
-
-[//]: # (# npm)
-
-[//]: # (npm i package-manager-detector)
-
-[//]: # ()
-
-[//]: # (# yarn)
-
-[//]: # (yarn add package-manager-detector)
-
-[//]: # (```)
+```toml
+package_manager_detector_rs = "0.2.5"
+```
 
 ## Usage
 
@@ -97,7 +87,7 @@ fn main() {
     let agent = pm.unwrap().agent;
     let get_command = resolve_command(&agent, "add", vec!["@antfu/ni"]);
     let get_command = get_command.unwrap();
-    
+
     println!("Detected the {} package manager. You can run a install with {} {}", &agent, get_command.command, get_command.args.join(" "))
     // Detected the yarn@berry package manager. You can run a install with yarn add @antfu/ni
 }
