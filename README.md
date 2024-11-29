@@ -1,12 +1,22 @@
 # package_manager_detector_rs
 
-[//]: # ([![npm version][npm-version-src]][npm-version-href])
+[![Latest Version]][crates.io] [![Rustc Version 1.36+]][rustc]
 
-[//]: # ([![npm downloads][npm-downloads-src]][npm-downloads-href])
+[//]: # ([![Build Status]][actions] [![Latest Version]][crates.io] [![Rustc Version 1.36+]][rustc])
 
-[//]: # ([![JSDocs][jsdocs-src]][jsdocs-href])
+[//]: # ([Build Status]: https://img.shields.io/github/actions/workflow/status/serde-rs/json/ci.yml?branch=master)
 
-[//]: # ([![License][license-src]][license-href])
+[//]: # ()
+
+[//]: # ([actions]: https://github.com/serde-rs/json/actions?query=branch%3Amaster)
+
+[Latest Version]: https://img.shields.io/crates/v/package_manager_detector_rs.svg
+
+[crates.io]: https://crates.io/crates/package_manager_detector_rs
+
+[Rustc Version 1.36+]: https://img.shields.io/badge/rustc-1.56+-lightgray.svg
+
+[rustc]: https://blog.rust-lang.org/2021/10/21/Rust-1.56.0.html
 
 Package manager detector is based on lock files and the `packageManager` field in the current project's `package.json`
 file.
