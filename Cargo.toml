@@ -1,7 +1,13 @@
 [package]
-name = "package_manager_detector_rs"
 version = "0.2.5"
+name = "package_manager_detector_rs"
+description = "Detect the package manager in use by identifying the associated package.json or lockfile."
+repository = "https://github.com/oxwazz/package_manager_detector_rs"
+license-file = "LICENSE"
+homepage = "https://github.com/oxwazz/package_manager_detector_rs"
+authors = ["Muhammad Rahmahalim <muhammad.rahmahalim@gmail.com>"]
 edition = "2021"
+keywords = ["npm", "yarn", "bun", "pnpm", "deno"]
 
 [dependencies]
 serde = { version = "1.0.215", features = ["derive"] }
