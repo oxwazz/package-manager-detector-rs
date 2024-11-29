@@ -1,8 +1,8 @@
 # package_manager_detector_rs
 
-[![Latest Version]][crates.io] [![Rustc Version 1.36+]][rustc]
+[![Latest Version]][crates.io] [![Rustc Version]][rustc]
 
-[//]: # ([![Build Status]][actions] [![Latest Version]][crates.io] [![Rustc Version 1.36+]][rustc])
+[//]: # ([![Build Status]][actions] [![Latest Version]][crates.io] [![Rustc Version]][rustc])
 
 [//]: # ([Build Status]: https://img.shields.io/github/actions/workflow/status/serde-rs/json/ci.yml?branch=master)
 
@@ -14,7 +14,7 @@
 
 [crates.io]: https://crates.io/crates/package_manager_detector_rs
 
-[Rustc Version 1.36+]: https://img.shields.io/badge/rustc-1.56+-lightgray.svg
+[Rustc Version]: https://img.shields.io/badge/rustc-1.56+-lightgray.svg
 
 [rustc]: https://blog.rust-lang.org/2021/10/21/Rust-1.56.0.html
 
