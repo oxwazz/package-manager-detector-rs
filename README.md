@@ -25,6 +25,7 @@ cargo add package_manager_detector_rs
 Or add the following line to your Cargo.toml:
 
 ```toml
+[dependencies]
 package_manager_detector_rs = "0.2.5"
 ```
 
