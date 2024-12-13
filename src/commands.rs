@@ -142,8 +142,8 @@ pub static COMMANDS: phf::Map<&'static str, &'static phf::Map<&'static str, Comm
     "deno" => &DENO,
 };
 
-#[derive(Debug)]
-pub struct ReturnResolveCommand {
+#[derive(Debug, PartialEq)]
+pub struct ResolveCommandReturn {
     pub command: String,
     pub args: Vec<String>,
 }
@@ -152,14 +152,14 @@ pub fn resolve_command(
     agent: &str,
     command: &str,
     args: Vec<&str>,
-) -> Option<ReturnResolveCommand> {
+) -> Option<ResolveCommandReturn> {
     let value = COMMANDS.get(agent).expect("COMMANDS.get(agent) error cuy");
     let value = value.get(command).expect("value.get(command) error cuy");
     dbg!(value);
     construct_command(value, args)
 }
 
-pub fn construct_command(value: &CommandList, args: Vec<&str>) -> Option<ReturnResolveCommand> {
+pub fn construct_command(value: &CommandList, args: Vec<&str>) -> Option<ResolveCommandReturn> {
     match value {
         CommandList::Static(v) => {
             dbg!(v.join(" "));
@@ -172,7 +172,7 @@ pub fn construct_command(value: &CommandList, args: Vec<&str>) -> Option<ReturnR
                     vec![v]
                 })
                 .collect();
-            Some(ReturnResolveCommand {
+            Some(ResolveCommandReturn {
                 command: list.get(0).expect("list.get(0) error cuy!").to_string(),
                 args: list[1..].iter().map(|&s| s.to_string()).collect(),
             })
@@ -180,7 +180,7 @@ pub fn construct_command(value: &CommandList, args: Vec<&str>) -> Option<ReturnR
         CommandList::Dynamic(v) => {
             dbg!(v.run(vec!["dev", "tes"]).join(" "));
             let list = v.run(args);
-            Some(ReturnResolveCommand {
+            Some(ResolveCommandReturn {
                 command: list.get(0).expect("list.get(0) error cuy!").to_string(),
                 args: list[1..].iter().map(|&s| s.to_string()).collect(),
             })
