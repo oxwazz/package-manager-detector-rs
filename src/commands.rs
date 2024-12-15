@@ -3,6 +3,7 @@ pub struct Npm<'a> {
     pub agent: &'a str,
 }
 impl<'a> Npm<'a> {
+    // TODO: add test
     pub fn run(&'a self, args: Vec<&'a str>) -> Vec<&'a str> {
         match args.len() {
             len if len >= 2 => {
@@ -38,7 +39,7 @@ pub static NPM: phf::Map<&'static str, CommandList> = phf::phf_map! {
     "global_uninstall" => CommandList::Static(&["npm", "uninstall", "-g", "0"]),
 };
 
-/** yarn 1 */
+// yarn 1
 pub static YARN: phf::Map<&'static str, CommandList> = phf::phf_map! {
     "agent" => CommandList::Static(&["yarn", "0"]),
     "run" => CommandList::Static(&["yarn", "run", "0"]),
@@ -54,7 +55,7 @@ pub static YARN: phf::Map<&'static str, CommandList> = phf::phf_map! {
     "global_uninstall" => CommandList::Static(&["yarn", "global", "remove", "0"]),
 };
 
-/** yarn 2+ */
+// yarn 2+
 // Yarn 2+ removed 'global', see https://github.com/yarnpkg/berry/issues/821
 pub static YARN_BERRY: phf::Map<&'static str, CommandList> = phf::phf_map! {
     "agent" => CommandList::Static(&["yarn", "0"]),
@@ -148,6 +149,7 @@ pub struct ResolveCommandReturn {
     pub args: Vec<String>,
 }
 
+// TODO: add test
 pub fn resolve_command(
     agent: &str,
     command: &str,
@@ -155,14 +157,13 @@ pub fn resolve_command(
 ) -> Option<ResolveCommandReturn> {
     let value = COMMANDS.get(agent).expect("COMMANDS.get(agent) error cuy");
     let value = value.get(command).expect("value.get(command) error cuy");
-    dbg!(value);
     construct_command(value, args)
 }
 
+// TODO: add test
 pub fn construct_command(value: &CommandList, args: Vec<&str>) -> Option<ResolveCommandReturn> {
     match value {
         CommandList::Static(v) => {
-            dbg!(v.join(" "));
             let list: Vec<_> = v
                 .iter()
                 .flat_map(|v| {
@@ -173,15 +174,14 @@ pub fn construct_command(value: &CommandList, args: Vec<&str>) -> Option<Resolve
                 })
                 .collect();
             Some(ResolveCommandReturn {
-                command: list.get(0).expect("list.get(0) error cuy!").to_string(),
+                command: list.first().expect("list.get(0) error cuy!").to_string(),
                 args: list[1..].iter().map(|&s| s.to_string()).collect(),
             })
         }
         CommandList::Dynamic(v) => {
-            dbg!(v.run(vec!["dev", "tes"]).join(" "));
             let list = v.run(args);
             Some(ResolveCommandReturn {
-                command: list.get(0).expect("list.get(0) error cuy!").to_string(),
+                command: list.first().expect("list.get(0) error cuy!").to_string(),
                 args: list[1..].iter().map(|&s| s.to_string()).collect(),
             })
         }

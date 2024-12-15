@@ -1,5 +1,5 @@
 ---
-source: tests/commands/npm_run.rs
+source: src/tests/commands/npm_run.rs
 expression: output
 snapshot_kind: text
 ---

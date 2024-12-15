@@ -1,5 +1,5 @@
 ---
-source: tests/detect/lookup.rs
+source: src/tests/detect/lookup.rs
 expression: "result.collect::<Vec<_>>()"
 snapshot_kind: text
 ---

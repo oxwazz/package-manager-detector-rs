@@ -17,7 +17,7 @@ pub struct HandlePackageManagerReturn {
     pub version: String,
 }
 
-pub fn parse_package_json<'a>(
+pub(crate) fn parse_package_json<'a>(
     filepath: &Path,
     on_unknown: Option<Box<dyn FnMut() + 'a>>,
 ) -> Option<HandlePackageManagerReturn> {
@@ -71,7 +71,7 @@ pub fn parse_package_json<'a>(
     }
 }
 
-pub fn lookup(cwd: Option<PathBuf>) -> impl Iterator<Item = PathBuf> {
+pub(crate) fn lookup(cwd: Option<PathBuf>) -> impl Iterator<Item = PathBuf> {
     // Default to current working directory if not provided
     let directory = cwd.unwrap_or_else(|| std::env::current_dir().unwrap_or(PathBuf::from(".")));
 
@@ -95,6 +95,7 @@ pub fn lookup(cwd: Option<PathBuf>) -> impl Iterator<Item = PathBuf> {
     })
 }
 
+// TODO: add test
 pub fn detect() -> Option<HandlePackageManagerReturn> {
     let directories = lookup(Some(PathBuf::from(".")));
     for directory in directories {
@@ -126,6 +127,7 @@ pub fn detect() -> Option<HandlePackageManagerReturn> {
     None
 }
 
+// TODO: add test
 /// I don't know how to implement this on rust,
 /// because `process.env.npm_config_user_agent`
 /// is node running process environment variable

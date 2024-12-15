@@ -1,0 +1,10 @@
+---
+source: src/tests/detect/parse_package_json.rs
+expression: package_info
+snapshot_kind: text
+---
+HandlePackageManagerReturn {
+    name: "pnpm",
+    agent: "pnpm",
+    version: "7.0.0",
+}

@@ -1,4 +1,6 @@
-use package_manager_detector_rs::detect::*;
+#[allow(unused_imports)]
+use crate::detect::parse_package_json;
+#[allow(unused_imports)]
 use serde_json::json;
 use std::io::Write;
 use tempfile::NamedTempFile;
@@ -11,7 +13,7 @@ fn test_yarn_v2_plus() {
     let temp_file = create_temp_json_file(content);
     let result = parse_package_json(temp_file.path(), None);
     let package_info = result.unwrap();
-    insta::assert_compact_debug_snapshot!(package_info);
+    insta::assert_debug_snapshot!(package_info);
 }
 
 #[test]
@@ -22,7 +24,7 @@ fn test_yarn_v1() {
     let temp_file = create_temp_json_file(content);
     let result = parse_package_json(temp_file.path(), None);
     let package_info = result.unwrap();
-    insta::assert_compact_debug_snapshot!(package_info);
+    insta::assert_debug_snapshot!(package_info);
 }
 
 #[test]
@@ -33,7 +35,7 @@ fn test_pnpm_v6() {
     let temp_file = create_temp_json_file(content);
     let result = parse_package_json(temp_file.path(), None);
     let package_info = result.unwrap();
-    insta::assert_compact_debug_snapshot!(package_info);
+    insta::assert_debug_snapshot!(package_info);
 }
 
 #[test]
@@ -45,7 +47,7 @@ fn test_pnpm_v7_plus() {
     let result = parse_package_json(temp_file.path(), None);
     assert!(result.is_some());
     let package_info = result.unwrap();
-    insta::assert_compact_debug_snapshot!(package_info);
+    insta::assert_debug_snapshot!(package_info);
 }
 
 #[test]
@@ -58,7 +60,7 @@ fn test_other_known_agents() {
         let temp_file = create_temp_json_file(content);
         let result = parse_package_json(temp_file.path(), None);
         let package_info = result.unwrap();
-        insta::assert_compact_debug_snapshot!(package_info);
+        insta::assert_debug_snapshot!(package_info);
     }
 }
 
@@ -69,7 +71,7 @@ fn test_unknown_agent_without_callback() {
     });
     let temp_file = create_temp_json_file(content);
     let result = parse_package_json(temp_file.path(), None);
-    insta::assert_compact_debug_snapshot!(result);
+    insta::assert_debug_snapshot!(result);
 }
 
 #[test]
@@ -86,7 +88,7 @@ fn test_unknown_agent_with_callback() {
         })),
     );
     assert!(called);
-    insta::assert_compact_debug_snapshot!(result);
+    insta::assert_debug_snapshot!(result);
 }
 
 #[test]
@@ -96,10 +98,11 @@ fn test_malformed_package_manager_string() {
     });
     let temp_file = create_temp_json_file(content);
     let result = parse_package_json(temp_file.path(), None);
-    insta::assert_compact_debug_snapshot!(result);
+    insta::assert_debug_snapshot!(result);
 }
 
 // Helper function to create a temporary JSON file for testing
+#[allow(dead_code)]
 fn create_temp_json_file(content: serde_json::Value) -> NamedTempFile {
     let mut temp_file = NamedTempFile::new().unwrap();
     write!(

@@ -44,7 +44,7 @@ package_manager_detector_rs = "0.2.5"
 To check the file system for which package manager is used:
 
 ```rust
-use package_manager_detector_rs::detect::{detect};
+use package_manager_detector_rs::{detect};
 
 fn main() {
     let pm = detect();
@@ -81,8 +81,7 @@ This package includes package manager agents and their corresponding commands fo
 A `resolve_command` function is provided to resolve the command for a specific agent.
 
 ```rust
-use package_manager_detector_rs::commands::{resolve_command};
-use package_manager_detector_rs::detect::{detect};
+use package_manager_detector_rs::{resolve_command, detect};
 
 fn main() {
     let pm = detect();
@@ -108,12 +107,30 @@ You can check the source code for more information.
 
 ## Credit
 
-package_manager_detector_rs is currently being developed and maintained by [Muhammad Rahmahalim](https://github.com/oxwazz).<br>
-This project is like [antfu-collective/package-manager-detector](https://github.com/antfu-collective/package-manager-detector) but in rust.
+package_manager_detector_rs is currently being developed and maintained
+by [Muhammad Rahmahalim](https://github.com/oxwazz).<br>
+This project is
+like [antfu-collective/package-manager-detector](https://github.com/antfu-collective/package-manager-detector) but in
+rust.
 
 ## License
 
 [MIT](./LICENSE) License © 2024-PRESENT [Muhammad Rahmahalim](https://github.com/oxwazz)
+
+[//]: # (test)
+
+[//]: # ()
+
+[//]: # (// run test & update snapshot)
+
+[//]: # (INSTA_UPDATE=always cargo test)
+
+[//]: # ()
+
+[//]: # (// only run test)
+
+[//]: # (cargo test)
+
 
 [//]: # (<!-- Badges -->)
 
