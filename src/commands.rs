@@ -1,17 +1,36 @@
 #[derive(Debug)]
-pub struct Npm<'a> {
+pub struct DynamicCommand<'a> {
     pub agent: &'a str,
 }
-impl<'a> Npm<'a> {
+impl<'a> DynamicCommand<'a> {
     // TODO: add test
-    pub fn run(&'a self, args: Vec<&'a str>) -> Vec<&'a str> {
-        match args.len() {
-            len if len >= 2 => {
-                let mut result = vec![self.agent, "run", args[0], "--"];
-                result.extend(&args[1..]);
-                result
-            }
-            1 => vec![self.agent, "run", args[0]],
+    pub(crate) fn run(&'a self, args: Vec<&'a str>) -> Vec<String> {
+        match self.agent {
+            "npm" | "pnpm" | "yarn" => match args.len() {
+                len if len >= 2 => {
+                    let mut result = vec![self.agent, "run", args[0], "--"];
+                    result.extend(&args[1..]);
+                    result.iter().map(|&x| x.to_string()).collect()
+                }
+                1 => [self.agent, "run", args[0]]
+                    .iter()
+                    .map(|&x| x.to_string())
+                    .collect(),
+                _ => vec![],
+            },
+            "deno" => match args.len() {
+                len if len >= 2 => {
+                    let custom_command = format!("npm:{}", &args[0]);
+                    let mut result = vec![self.agent, "run", custom_command.as_str()];
+                    result.extend(&args[1..]);
+                    result.iter().map(|&x| x.to_string()).collect()
+                }
+                1 => [self.agent, "run", args[0]]
+                    .iter()
+                    .map(|&x| x.to_string())
+                    .collect(),
+                _ => vec![],
+            },
             _ => vec![],
         }
     }
@@ -20,13 +39,13 @@ impl<'a> Npm<'a> {
 #[derive(Debug)]
 pub enum CommandList<'a> {
     Static(&'a [&'a str]),
-    Dynamic(Npm<'a>),
+    Dynamic(DynamicCommand<'a>),
     Empty,
 }
 
 pub static NPM: phf::Map<&'static str, CommandList> = phf::phf_map! {
     "agent" => CommandList::Static(&["npm", "0"]),
-    "run" => CommandList::Dynamic(Npm {agent: "npm"}),
+    "run" => CommandList::Dynamic(DynamicCommand {agent: "npm"}),
     "install" => CommandList::Static(&["npm", "i", "0"]),
     "frozen" => CommandList::Static(&["npm", "ci"]),
     "global" => CommandList::Static(&["npm", "i", "-g", "0"]),
@@ -89,7 +108,7 @@ pub static PNPM: phf::Map<&'static str, CommandList> = phf::phf_map! {
 
 pub static PNPM_6: phf::Map<&'static str, CommandList> = phf::phf_map! {
     "agent" => CommandList::Static(&["pnpm", "0"]),
-    "run" => CommandList::Dynamic(Npm {agent: "pnpm"}),
+    "run" => CommandList::Dynamic(DynamicCommand {agent: "pnpm"}),
     "install" => CommandList::Static(&["pnpm", "i", "0"]),
     "frozen" => CommandList::Static(&["pnpm", "i", "--frozen-lockfile"]),
     "global" => CommandList::Static(&["pnpm", "add", "-g", "0"]),
@@ -119,7 +138,7 @@ pub static BUN: phf::Map<&'static str, CommandList> = phf::phf_map! {
 
 pub static DENO: phf::Map<&'static str, CommandList> = phf::phf_map! {
     "agent" => CommandList::Static(&["deno", "0"]),
-    "run" => CommandList::Static(&["deno", "run", "0"]),
+    "run" => CommandList::Dynamic(DynamicCommand {agent: "deno"}),
     "install" => CommandList::Static(&["deno", "install", "0"]),
     "frozen" => CommandList::Static(&["deno", "install", "--frozen"]),
     "global" => CommandList::Static(&["deno", "install", "-g", "0"]),
@@ -182,7 +201,7 @@ pub fn construct_command(value: &CommandList, args: Vec<&str>) -> Option<Resolve
             let list = v.run(args);
             Some(ResolveCommandReturn {
                 command: list.first().expect("list.get(0) error cuy!").to_string(),
-                args: list[1..].iter().map(|&s| s.to_string()).collect(),
+                args: list[1..].to_vec(),
             })
         }
         CommandList::Empty => None,
