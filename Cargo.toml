@@ -1,5 +1,5 @@
 [package]
-version = "0.2.6"
+version = "0.2.7"
 name = "package_manager_detector_rs"
 description = "Detect the package manager in use by identifying the associated package.json or lockfile."
 repository = "https://github.com/oxwazz/package_manager_detector_rs"
